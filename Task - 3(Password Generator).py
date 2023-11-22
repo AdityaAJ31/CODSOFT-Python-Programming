@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 import math
+from tkinter import messagebox
 
 p = ""
 n=0
@@ -15,6 +16,7 @@ def letter():
     p = p + chr(random.randint(33,47))
 
 def edit():
+    global p
     p=""
     regen_btn["state"] = DISABLED
     gen_btn["state"] = NORMAL
@@ -30,7 +32,7 @@ def gen():
         edit_btn["state"] = NORMAL
         gen_btn["state"] = DISABLED
         password_field.config(state=DISABLED)
-        messagebox.showinfo("Generated Password",p) 
+        messagebox.showinfo("Generated Password",p[:n]) 
     except:
         messagebox.showerror("showerror", "Enter Numerical Value")
     
@@ -40,8 +42,8 @@ def regen():
     p = ""
     for i in range(0,math.ceil(n/4)):
         letter()
-    messagebox.showinfo("Regenerated Password",p) 
-    
+    messagebox.showinfo("Regenerated Password",p[:n]) 
+password = StringVar()
 pass_lbl = Label(gui, text = "Enter No. of characters you want in your password - ") 
 password_field = Entry(gui, textvariable=password)
 gen_btn = Button(gui, text=' Generate Password ', command=gen, height=1, width=15)
